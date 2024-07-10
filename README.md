@@ -6,9 +6,12 @@ This project showcases a comprehensive method to extract and recognize informati
 This project is designed to process images of gas station price tables, extract text and numbers, and accurately recognize and display the prices. The method leverages a custom-trained machine learning model on the SHVN Dataset, along with various image processing techniques to handle different table layouts and formats.
 The model recognizes standard formats and is a work in progress, currently identifying the majority of gas station tables.
 
-## Image examples 
-![gas_price13](https://github.com/lodist/Gas-Station-Price-Table-OCR/assets/75701170/f41147ce-30b6-4f48-952f-e8ffdc8bd987)
-![gas_price15](https://github.com/lodist/Gas-Station-Price-Table-OCR/assets/75701170/ddba261d-f7c0-495a-b55f-80b7ea75e5b5)
+## Image examples
+
+<p align="center">
+  <img src="https://github.com/lodist/Gas-Station-Price-Table-OCR/assets/75701170/f41147ce-30b6-4f48-952f-e8ffdc8bd987" width="45%" />
+  <img src="https://github.com/lodist/Gas-Station-Price-Table-OCR/assets/75701170/ddba261d-f7c0-495a-b55f-80b7ea75e5b5" width="45%" />
+</p>
 
 
 ### Key Features
