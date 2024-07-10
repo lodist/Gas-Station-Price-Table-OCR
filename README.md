@@ -39,7 +39,7 @@ pip install -r requirements.txt
 To use the code, simply call the `process_image` function with the path to your image:
 
 ```python
-from process_image import process_image
+from OCR_gas_station_table import process_image
 
 result = process_image(image_path='path/to/your/image.png')
 print(result)
