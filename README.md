@@ -11,7 +11,7 @@ The model recognizes standard formats and is a work in progress, currently ident
 <p align="center">
   <img src="https://github.com/lodist/Gas-Station-Price-Table-OCR/assets/75701170/f41147ce-30b6-4f48-952f-e8ffdc8bd987" width="20%" />
   <img src="https://github.com/lodist/Gas-Station-Price-Table-OCR/assets/75701170/ddba261d-f7c0-495a-b55f-80b7ea75e5b5" width="20%" />
-  <img src="https://github.com/lodist/Gas-Station-Price-Table-OCR/assets/75701170/fe0b22a3-76b8-4243-8f81-03e572978bd2" width="20%" />
+  <img src="https://github.com/lodist/Gas-Station-Price-Table-OCR/assets/75701170/fe0b22a3-76b8-4243-8f81-03e572978bd2" width="13%" />
 </p>
 
 
