@@ -18,7 +18,6 @@ def process_image(image_path=None):
             logger = logging.getLogger('ppocr')
             logger.setLevel(logging.DEBUG)
             from paddleocr import PaddleOCR
-            print("DEBUG: After Imports")
             # %%
             if image_path:
                 print(f"Image Path: {image_path}, Type: {type(image_path)}")
@@ -312,7 +311,6 @@ def process_image(image_path=None):
                         # cv.waitKey(0)
             
                         h = roi.shape[0]
-                        print("DEBUG: 3")
                         ratio = int(float(h * 0.07))
                         eroded[-ratio:,] = 0
                         eroded[:, :ratio] = 0
@@ -1148,7 +1146,6 @@ def process_image(image_path=None):
                     sorted_definition_list = result_list
             
                 # print(sorted_definition_list)
-                print("DEBUG: 1111")
                 # Lists to store words based on criteria
                 List1 = []  # For words without 3 or more numbers
                 List2 = []  # For words with 3 or more numbers
@@ -1204,7 +1201,6 @@ def process_image(image_path=None):
                         value = results_3[key]
                         
                         # If the number starts with a dot and the first number after the dot is 4 or greater
-                        print(f"DEBUG: Trying to convert '{{value[1]}}' in condition check for value starting with '.'")
                         if value.startswith('.') and int(float(value[1])) >= 4:
                             value = '1' + value
                         elif value.startswith('.'):
@@ -1212,7 +1208,6 @@ def process_image(image_path=None):
                         
                         # If the number doesn't contain a dot
                         if value[0].isdigit() and '.' not in value:
-                            print(f"DEBUG: Checking first digit of '{{value[0]}}' in condition")
                             if int(float(value[0])) in [1, 2, 3]:  # First digit is 1, 2, or 3
                                 value = value[0] + '.' + value[1:]
                             elif int(float(value[0])) >= 4:  # First digit is 4 or greater
@@ -1221,9 +1216,115 @@ def process_image(image_path=None):
                         # Convert the number to float and round to two decimal places
                         converted_num = round(float(value), 2)
                         results_3[key] = "{:.2f}".format(converted_num)
-                print("DEBUG: 2222")
+                        
+                #4
+                # Calculate the average y-coordinate of all boxes
+                avg_ys = []
+                for box in boxes:
+                    ys = [coord[1] for coord in box]
+                    avg_ys.append(np.mean(ys))
+
+                # Pair each box with its corresponding word and average y-coordinate
+                pairs = list(zip(boxes, words, avg_ys))
+
+                # Sort the pairs based on the average y-coordinate
+                pairs.sort(key=lambda pair: pair[2])
+
+                # Initialize a list to hold the final joined words
+                final_words = []
+
+                # Process each pair
+                for i in range(len(pairs)):
+                    current_word = pairs[i][1]
+                    current_avg_y = pairs[i][2]
+
+                    # Check if this is the first pair, add its word to final_words
+                    if i == 0:
+                        final_words.append(current_word)
+                    else:
+                        # Check if the current word contains a numeric value (no spaces) and no letters
+                        has_numeric_value = any(char.isdigit() for char in current_word)
+                        has_letters = any(char.isalpha() for char in current_word)
+
+                        if has_numeric_value and not has_letters:
+                            final_words[-1] += ' ' + current_word
+                        else:
+                            # Initialize variables to track the nearest word and its y-coordinate difference
+                            nearest_word = None
+                            min_y_difference = float('inf')
+
+                            # Find the nearest word to the current word
+                            for j in range(i - 1, -1, -1):  # Look backward from the current word
+                                y_difference = abs(current_avg_y - pairs[j][2])
+                                if y_difference < min_y_difference:
+                                    nearest_word = pairs[j][1]
+                                    min_y_difference = y_difference
+                                else:
+                                    break  # Stop searching when the y-coordinate difference starts to increase
+
+                            # Calculate the percent difference in y-coordinates with the nearest word
+                            diff_pct = min_y_difference / ((current_avg_y + pairs[i - 1][2]) / 2)
+
+                            # If the percent difference is less than a certain threshold and the words are unique
+                            if diff_pct < 0.15 and current_word not in final_words[-1]:
+                                # Join the words
+                                final_words[-1] += ' ' + current_word
+                            else:
+                                # Otherwise, add a new word to final_words
+                                final_words.append(current_word)
+
+                for i in range(len(final_words) - 2, 0, -1):
+                    if final_words[i - 1] == final_words[i + 1]:
+                        final_words[i - 1] = final_words[i - 1] + ' ' + final_words[i]
+                        del final_words[i]
+
+                sorted_definition_list = final_words
+                # Check if sorted_definition_list is empty
+                if not sorted_definition_list:
+                    result_list = []
+                else:
+                    result_list = [sorted_definition_list[0]]
+                    for i in range(1, len(sorted_definition_list)):
+                        current_word = sorted_definition_list[i]
+                        previous_word = sorted_definition_list[i - 1]
+
+                        # Check if the current word is the same as the previous word
+                        if current_word == previous_word and i > 1:
+                            # If the same, append the current word to the previous word in result_list
+                            result_list[-2] += ' ' + current_word
+                        else:
+                            result_list.append(current_word)
+
+                    sorted_definition_list = result_list
+
+                # Debugging output
+                print("Final sorted definition list:", sorted_definition_list)
+
+                # Lists to store words based on criteria
+                List1 = []  # For words without 3 or more numbers
+                List2 = []  # For words with 3 or more numbers
+
+                for word in words:
+                    # Extract all numbers (including decimals)
+                    numbers = re.findall(r'\d+\.\d+|\d+', word)
+
+                    # Count total digits in all numbers found in the word
+                    total_digits = sum(len(num.replace('.', '')) for num in numbers)
+
+                    if total_digits >= 3:
+                        List2.append(word)
+                    else:
+                        List1.append(word)
+
+                # Check if either List1 or List2 is empty
+                if not List1 or not List2:
+                    results_4 = {}
+                else:
+                    # Create the dictionary by pairing elements from List1 and List2
+                    results_4 = dict(zip(List1, List2))
+
                 # %%
-                def find_longest_dictionary(a, b, c):
+                def find_longest_dictionary(a, b, c, d):
                     # Check if numbers in the dictionary meet the required conditions
                     def is_valid(d):
                         unique_numbers = set()
@@ -1231,33 +1332,34 @@ def process_image(image_path=None):
                             try:
                                 number = float(value)
                                 decimal_part = str(value).split('.')
-                                if not (1 <= number <= 5) or (len(decimal_part) == 2 and len(decimal_part[1]) != 2):
+                                if not (1 <= number <= 500) or (len(decimal_part) == 2 and len(decimal_part[1]) != 2):
                                     return False
                                 unique_numbers.add(number)
                             except ValueError:
                                 return False
-            
+
                         # Checking if at least two numbers in the dictionary are different
                         if len(unique_numbers) < 2:
                             return False
-            
+
                         return True
-            
+
                     valid_dicts = {
                         'a': a,
                         'b': b,
-                        'c': c
+                        'c': c,
+                        'd': d
                     }
                     valid_dicts = {key: value for key, value in valid_dicts.items() if is_valid(value)}
                     
                     if not valid_dicts:
                         return None, None
-            
+
                     winner_key = max(valid_dicts, key=lambda k: len(valid_dicts[k]))
                     return valid_dicts[winner_key], winner_key
-            
+
                 # Finding the longest valid dictionary and its identifier
-                longest_dict, winner = find_longest_dictionary(results_3, results_1, results_2)
+                longest_dict, winner = find_longest_dictionary(results_3, results_1, results_2, results_4)
                 if longest_dict:
                     print(longest_dict)
                     return longest_dict  # assuming longest_dict is a dictionary or another JSON serializable type
@@ -1271,4 +1373,3 @@ def process_image(image_path=None):
         # raise e
         # Instead of raising the exception, return an error message in a dictionary
         return {"error": "bad quality"}
-
