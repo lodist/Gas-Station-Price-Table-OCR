@@ -95,38 +95,27 @@ def process_image(image_path=None):
                         has_letters = any(char.isalpha() for char in current_word)
                         
                         if has_numeric_value and not has_letters:
-                            final_words[-1] += ' ' + current_word
-                        else:
-                            # Initialize variables to track the nearest word and its y-coordinate difference
-                            nearest_word = None
-                            min_y_difference = float('inf')
-                            
-                            # Find the nearest word to the current word
-                            for j in range(i-1, -1, -1):  # Look backward from the current word
-                                y_difference = abs(current_avg_y - pairs[j][2])
-                                if y_difference < min_y_difference:
-                                    nearest_word = pairs[j][1]
-                                    min_y_difference = y_difference
-                                else:
-                                    break  # Stop searching when the y-coordinate difference starts to increase
-                            
-                            # Calculate the percent difference in y-coordinates with the nearest word
-                            diff_pct = min_y_difference / ((current_avg_y + pairs[i-1][2]) / 2)
-                            
-                            # If the percent difference is less than a certain threshold and the words are unique
-                            if diff_pct < 0.15 and current_word not in final_words[-1]:
-                                # Join the words
+                            # Check the last word added to final_words to prevent consecutive numbers
+                            last_word = final_words[-1]
+                            if not any(char.isdigit() for char in last_word):
                                 final_words[-1] += ' ' + current_word
-                            else:
-                                # Otherwise, add a new word to final_words
+                        else:
+                            # Check the last word added to final_words to prevent consecutive words
+                            last_word = final_words[-1]
+                            if any(char.isdigit() for char in last_word):
                                 final_words.append(current_word)
-            
+                            else:
+                                # Remove the last word if it's a duplicate and add the current word
+                                final_words[-1] = current_word
+
+                # Remove duplicates if they occur due to the above process
                 for i in range(len(final_words)-2, 0, -1):
                     if final_words[i-1] == final_words[i+1]:
                         final_words[i-1] = final_words[i-1] + ' ' + final_words[i]
                         del final_words[i]
-            
+
                 sorted_definition_list = final_words
+
             
                 if not sorted_definition_list:  # Check if the list is empty
                     result_list = []
@@ -1095,37 +1084,25 @@ def process_image(image_path=None):
                         has_letters = any(char.isalpha() for char in current_word)
                         
                         if has_numeric_value and not has_letters:
-                            final_words[-1] += ' ' + current_word
-                        else:
-                            # Initialize variables to track the nearest word and its y-coordinate difference
-                            nearest_word = None
-                            min_y_difference = float('inf')
-                            
-                            # Find the nearest word to the current word
-                            for j in range(i-1, -1, -1):  # Look backward from the current word
-                                y_difference = abs(current_avg_y - pairs[j][2])
-                                if y_difference < min_y_difference:
-                                    nearest_word = pairs[j][1]
-                                    min_y_difference = y_difference
-                                else:
-                                    break  # Stop searching when the y-coordinate difference starts to increase
-                            
-                            # Calculate the percent difference in y-coordinates with the nearest word
-                            diff_pct = min_y_difference / ((current_avg_y + pairs[i-1][2]) / 2)
-                            
-                            # If the percent difference is less than a certain threshold and the words are unique
-                            if diff_pct < 0.15 and current_word not in final_words[-1]:
-                                # Join the words
+                            # Check the last word added to final_words to prevent consecutive numbers
+                            last_word = final_words[-1]
+                            if not any(char.isdigit() for char in last_word):
                                 final_words[-1] += ' ' + current_word
-                            else:
-                                # Otherwise, add a new word to final_words
+                        else:
+                            # Check the last word added to final_words to prevent consecutive words
+                            last_word = final_words[-1]
+                            if any(char.isdigit() for char in last_word):
                                 final_words.append(current_word)
-            
+                            else:
+                                # Remove the last word if it's a duplicate and add the current word
+                                final_words[-1] = current_word
+
+                # Remove duplicates if they occur due to the above process
                 for i in range(len(final_words)-2, 0, -1):
                     if final_words[i-1] == final_words[i+1]:
                         final_words[i-1] = final_words[i-1] + ' ' + final_words[i]
                         del final_words[i]
-            
+
                 sorted_definition_list = final_words
                 # Check if sorted_definition_list is empty
                 if not sorted_definition_list:
@@ -1135,15 +1112,16 @@ def process_image(image_path=None):
                     for i in range(1, len(sorted_definition_list)):
                         current_word = sorted_definition_list[i]
                         previous_word = sorted_definition_list[i - 1]
-            
+
                         # Check if the current word is the same as the previous word
                         if current_word == previous_word and i > 1:
                             # If the same, append the current word to the previous word in result_list
                             result_list[-2] += ' ' + current_word
                         else:
                             result_list.append(current_word)
-            
+
                     sorted_definition_list = result_list
+
             
                 # print(sorted_definition_list)
                 # Lists to store words based on criteria
@@ -1247,32 +1225,20 @@ def process_image(image_path=None):
                         has_letters = any(char.isalpha() for char in current_word)
 
                         if has_numeric_value and not has_letters:
-                            final_words[-1] += ' ' + current_word
-                        else:
-                            # Initialize variables to track the nearest word and its y-coordinate difference
-                            nearest_word = None
-                            min_y_difference = float('inf')
-
-                            # Find the nearest word to the current word
-                            for j in range(i - 1, -1, -1):  # Look backward from the current word
-                                y_difference = abs(current_avg_y - pairs[j][2])
-                                if y_difference < min_y_difference:
-                                    nearest_word = pairs[j][1]
-                                    min_y_difference = y_difference
-                                else:
-                                    break  # Stop searching when the y-coordinate difference starts to increase
-
-                            # Calculate the percent difference in y-coordinates with the nearest word
-                            diff_pct = min_y_difference / ((current_avg_y + pairs[i - 1][2]) / 2)
-
-                            # If the percent difference is less than a certain threshold and the words are unique
-                            if diff_pct < 0.15 and current_word not in final_words[-1]:
-                                # Join the words
+                            # Check the last word added to final_words to prevent consecutive numbers
+                            last_word = final_words[-1]
+                            if not any(char.isdigit() for char in last_word):
                                 final_words[-1] += ' ' + current_word
-                            else:
-                                # Otherwise, add a new word to final_words
+                        else:
+                            # Check the last word added to final_words to prevent consecutive words
+                            last_word = final_words[-1]
+                            if any(char.isdigit() for char in last_word):
                                 final_words.append(current_word)
+                            else:
+                                # Replace the last word if it's a duplicate and add the current word
+                                final_words[-1] = current_word
 
+                # Remove duplicates if they occur due to the above process
                 for i in range(len(final_words) - 2, 0, -1):
                     if final_words[i - 1] == final_words[i + 1]:
                         final_words[i - 1] = final_words[i - 1] + ' ' + final_words[i]
@@ -1296,6 +1262,7 @@ def process_image(image_path=None):
                             result_list.append(current_word)
 
                     sorted_definition_list = result_list
+
 
                 # Debugging output
                 print("Final sorted definition list:", sorted_definition_list)
@@ -1322,6 +1289,16 @@ def process_image(image_path=None):
                 else:
                     # Create the dictionary by pairing elements from List1 and List2
                     results_4 = dict(zip(List1, List2))
+                    
+                    # Ensure each value in results_4 has exactly two decimal places
+                    for key in results_4:
+                        try:
+                            value = float(results_4[key])
+                            results_4[key] = "{:.2f}".format(value)
+                        except ValueError:
+                            # Handle cases where the value cannot be converted to float
+                            results_4[key] = "0.00"  # or some other default value or error handling
+
 
                 # %%
                 def find_longest_dictionary(a, b, c, d):
@@ -1373,3 +1350,4 @@ def process_image(image_path=None):
         # raise e
         # Instead of raising the exception, return an error message in a dictionary
         return {"error": "bad quality"}
+
