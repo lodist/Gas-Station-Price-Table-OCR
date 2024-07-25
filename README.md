@@ -67,7 +67,10 @@ Contributions are welcome! If you have any suggestions or improvements, please c
 
 ## License
 
-This project is licensed under the Apache License 2.0. See the [LICENSE](LICENSE) file for more details.
+This project is licensed under the Creative Commons Attribution-NonCommercial 4.0 International License. See the [LICENSE](LICENSE) file for more details.
+
+For commercial use, please contact lorisdistefano@protonmail.com
+
 
 ## Contact
 
