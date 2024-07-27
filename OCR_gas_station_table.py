@@ -14,7 +14,7 @@ def process_image(image_path=None):
             import shutil
             import sys
             import logging
-            logging.basicConfig(level=logging.DEBUG)  # <-- Add this line here
+            logging.basicConfig(level=logging.DEBUG)  
             logger = logging.getLogger('ppocr')
             logger.setLevel(logging.DEBUG)
             from paddleocr import PaddleOCR
@@ -66,7 +66,6 @@ def process_image(image_path=None):
                 left_words = [words[i] for i in left_indices]
                 # print(left_words)
             
-                # Calculate the average y-coordinate of all boxes (assuming 'left_boxes' is defined somewhere else)
                 avg_ys = []  
                 for box in left_boxes:
                     ys = [coord[1] for coord in box]
@@ -259,8 +258,8 @@ def process_image(image_path=None):
                 all_contours_list = []
             
                 def process_images(kernel_size):
-                    all_segment_dicts = {}  # Initialize the dictionary here
-                    images_saved_per_contour = {}  # Initialize this dictionary here
+                    all_segment_dicts = {} 
+                    images_saved_per_contour = {}  
             
                     # Loop over the keys and values in the image_dict_pre_2
                     for filename, roi in enhanced_images_dict.items():  # Note: changed roi_color to roi
@@ -689,8 +688,8 @@ def process_image(image_path=None):
                 all_contours_list = []
             
                 def process_images(kernel_size):
-                    all_segment_dicts = {}  # Initialize the dictionary here
-                    images_saved_per_contour = {}  # Initialize this dictionary here
+                    all_segment_dicts = {} 
+                    images_saved_per_contour = {}  
             
                     # Loop over the keys and values in the image_dict_pre_2
                     for filename, roi in image_dict_pre_2.items():  # Note: changed roi_color to roi
@@ -1267,7 +1266,7 @@ def process_image(image_path=None):
                             results_4[key] = "{:.2f}".format(value)
                         except ValueError:
                             # Handle cases where the value cannot be converted to float
-                            results_4[key] = "0.00"  # or some other default value or error handling
+                            results_4[key] = "0.00" 
 
 
                 # %%
@@ -1309,7 +1308,7 @@ def process_image(image_path=None):
                 longest_dict, winner = find_longest_dictionary(results_3, results_1, results_2, results_4)
                 if longest_dict:
                     print(longest_dict)
-                    return longest_dict  # assuming longest_dict is a dictionary or another JSON serializable type
+                    return longest_dict  
                 else:
                     return {"error": "invalid"}
             else:
