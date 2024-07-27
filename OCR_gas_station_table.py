@@ -226,7 +226,6 @@ def process_image(image_path=None):
             
                 # %%
                 # #1
-                #####################################################################################################################################
                 #SAVE MOST IMPORTANT CONTOURS
             
                 # Define a function to enhance the resolution of an image
@@ -459,8 +458,6 @@ def process_image(image_path=None):
                     interpreter.allocate_tensors()
 
                 # Load the TFLite model and allocate tensors
-                # interpreter = tflite.Interpreter(model_path=os.path.join(App.get_running_app().user_data_dir, 'app', 'shvn_model.tflite'))
-                # # interpreter = tf.lite.Interpreter(model_path=os.path.join(App.get_running_app().user_data_dir, 'app', 'shvn_model.tflite'))
                 try:
                     interpreter = tflite.Interpreter(model_path="shvn_model.tflite")
                     interpreter.allocate_tensors()
@@ -517,18 +514,6 @@ def process_image(image_path=None):
                 # Remap keys of the contour_predictions_2 dictionary to start from 0
                 keys = sorted(contour_predictions.keys())
                 contour_predictions = {idx: contour_predictions[key] for idx, key in enumerate(keys)}
-            
-                # # Print the predicted numbers for each contour
-                # for contour_idx, predictions in contour_predictions.items():
-                #     print(f"Contour {contour_idx} predicted numbers:", predictions)
-            
-                # # Print the probabilities for each contour
-                # for contour_idx, probabilities in contour_probabilities.items():
-                #     print(f"Contour {contour_idx} prediction probabilities:", probabilities)
-            
-                # # plt.imshow(img, cmap=plt.cm.binary)
-                # # plt.show()
-                # print(contour_predictions)
             
                 # %%
                 #1
@@ -613,7 +598,6 @@ def process_image(image_path=None):
                 else:
                     results_1 = {}
                     #print("No results found.")
-                # print(results_1)
             
                 # %%
                 #2
@@ -817,8 +801,8 @@ def process_image(image_path=None):
             
                         # Add this image's contour dictionary to all_segment_dicts
                         all_segment_dicts[filename] = contour_dict
-                                
-                    ########################################################################################################################################
+
+                    
                     #SAVE IMAGES OF NUMBERS 
             
                     # Set the desired size of the saved images
@@ -961,18 +945,6 @@ def process_image(image_path=None):
                 # Remap keys of the contour_predictions_2 dictionary to start from 0
                 keys = sorted(contour_predictions_2.keys())
                 contour_predictions_2 = {idx: contour_predictions_2[key] for idx, key in enumerate(keys)}
-            
-                # # Print the predicted numbers for each contour
-                # for contour_idx, predictions in contour_predictions_2.items():
-                #     print(f"Contour {contour_idx} predicted numbers:", predictions)
-            
-                # # Print the probabilities for each contour
-                # for contour_idx, probabilities in contour_probabilities_2.items():
-                #     print(f"Contour {contour_idx} prediction probabilities:", probabilities)
-            
-                # plt.imshow(img, cmap=plt.cm.binary)
-                # plt.show()
-                # print(contour_predictions_2)
             
                 # %%
                 #2
@@ -1144,8 +1116,6 @@ def process_image(image_path=None):
                     results_3 = {}
                 else:
             
-                    # print(List1)
-                    # print(List2)
                     # Pair words and numbers with their bounding boxes and y-coordinates
                     words_with_coords = list(zip(words, boxes, avg_ys))
             
