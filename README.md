@@ -51,6 +51,7 @@ print(result)
 ```python
 result = process_image(image_path='sample_gas_station_image.png')
 print(result)
+{'Bf 95': '1.88', 'Bf 98': '1.96', 'Diesel': '1.95'}
 ```
 
 ## Model Training
