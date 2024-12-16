@@ -3,3 +3,4 @@ pillow
 tensorflow
 numpy
 paddleocr
+paddlepaddle
