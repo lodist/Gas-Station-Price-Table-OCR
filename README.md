@@ -29,7 +29,13 @@ The model recognizes standard formats and is a work in progress, currently ident
 
 ## Installation
 
-To get started, clone the repository and install the required dependencies:
+To get started, follow these steps:
+
+1. Open **Command Prompt** as an administrator:
+   - Press `Win + S`, search for **Command Prompt**.
+   - Right-click on **Command Prompt** and select **Run as administrator**.
+  
+2. Clone the repository and navigate to the project directory:
 ```bash
 git clone https://github.com/yourusername/gas-station-price-table-recognition.git
 cd gas-station-price-table-recognition
