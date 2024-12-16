@@ -68,6 +68,12 @@ The model used in this project is trained on the SHVN Dataset and then converted
 - **Train the Model**: Use the training script provided in the repository to train the model.
 - **Convert to TFLite**: Convert the trained model to TensorFlow Lite format for efficient deployment.
 
+
+## Execution Performance
+
+After the initial deployment, which takes approximately **30 **seconds, the script processes each image in **2-3 **seconds to produce results. 
+This performance ensures quick and efficient processing for practical applications.
+
 ## Contributing
 
 Contributions are welcome! If you have any suggestions or improvements, please create a pull request or open an issue.
