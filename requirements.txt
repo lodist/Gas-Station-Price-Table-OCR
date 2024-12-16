@@ -1,0 +1,8 @@
+opencv-python
+pillow
+tensorflow
+numpy
+paddleocr
+shutil
+logging
+re
