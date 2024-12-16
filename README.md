@@ -71,7 +71,7 @@ The model used in this project is trained on the SHVN Dataset and then converted
 
 ## Execution Performance
 
-After the initial deployment, which takes approximately **30 **seconds, the script processes each image in **2-3 **seconds to produce results. 
+After the initial deployment, which takes approximately 30 seconds, the script processes each image in **2-3 seconds** to produce results.
 This performance ensures quick and efficient processing for practical applications.
 
 ## Contributing
