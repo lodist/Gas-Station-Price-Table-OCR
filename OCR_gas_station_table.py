@@ -1,6 +1,6 @@
 
 def process_image(image_path=None):
-    print("DEBUG: Entered process_image function")
+    # print("DEBUG: Entered process_image function")
     try:
         if image_path:
             # %%
@@ -20,7 +20,7 @@ def process_image(image_path=None):
             from paddleocr import PaddleOCR
             # %%
             if image_path:
-                print(f"Image Path: {image_path}, Type: {type(image_path)}")
+                # print(f"Image Path: {image_path}, Type: {type(image_path)}")
                 img_original = cv.imread(image_path)
             
                 # %%
@@ -29,7 +29,7 @@ def process_image(image_path=None):
                 # Setup model
                 ocr_model = PaddleOCR(lang='en')
                 result = ocr_model.ocr(image_path)
-                print(f"OCR Result: {result}")  # Debugging line
+                # print(f"OCR Result: {result}")  # Debugging line
 
                 # Check if OCR result is empty or None and return if it is
                 if not result:
@@ -1234,7 +1234,7 @@ def process_image(image_path=None):
 
 
                 # Debugging output
-                print("Final sorted definition list:", sorted_definition_list)
+                # print("Final sorted definition list:", sorted_definition_list)
 
                 # Lists to store words based on criteria
                 List1 = []  # For words without 3 or more numbers
