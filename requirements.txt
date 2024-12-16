@@ -3,6 +3,3 @@ pillow
 tensorflow
 numpy
 paddleocr
-shutil
-logging
-re
