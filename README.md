@@ -37,7 +37,7 @@ To get started, follow these steps:
   
 2. Clone the repository and navigate to the project directory:
 ```bash
-git clone https://github.com/yourusername/gas-station-price-table-recognition.git
+git clone https://github.com/lodist/gas-station-price-table-recognition.git
 cd gas-station-price-table-recognition
 pip install -r requirements.txt
 ```
