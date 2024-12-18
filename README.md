@@ -6,6 +6,25 @@ This project showcases a comprehensive method to extract and recognize informati
 This project is designed to process images of gas station price tables, extract text and numbers, and accurately recognize and display the prices. The method leverages a custom-trained machine learning model on the SHVN Dataset, along with various image processing techniques to handle different table layouts and formats.
 The model recognizes standard formats and is a work in progress, currently identifying the majority of gas station tables.
 
+## System Overview
+
+This project integrates multiple components into a cohesive system for extracting and recognizing prices from gas station tables. The pipeline consists of the following steps:
+
+1. **Image Preprocessing**:
+   - Enhances image quality (contrast adjustment, resizing, etc.).
+   - Applies contour detection to locate regions of interest.
+
+2. **Optical Character Recognition (OCR)**:
+   - Uses PaddleOCR to extract text from identified regions.
+
+3. **Custom ML Model**:
+   - Processes segmented images to predict numeric values using a TensorFlow Lite model.
+
+4. **Post-Processing**:
+   - Matches recognized text with detected numbers.
+   - Validates and formats the final output to ensure accuracy.
+
+
 ## Image examples
 
 <p align="center">
@@ -13,6 +32,11 @@ The model recognizes standard formats and is a work in progress, currently ident
   <img src="https://github.com/lodist/Gas-Station-Price-Table-OCR/assets/75701170/ddba261d-f7c0-495a-b55f-80b7ea75e5b5" width="20%" />
   <img src="https://github.com/lodist/Gas-Station-Price-Table-OCR/assets/75701170/fe0b22a3-76b8-4243-8f81-03e572978bd2" width="13%" />
 </p>
+
+### Input Requirements
+
+- Supported Formats: `.png`, `.jpg`
+- Recommended Resolution: 300 DPI or higher for best accuracy.
 
 
 ### Key Features
