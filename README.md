@@ -50,6 +50,25 @@ This project integrates multiple components into a cohesive system for extractin
 - **Post-Processing**: Matches and validates extracted text and numbers to generate accurate and reliable results.
 - **Adaptive Learning**: Continuously improves the model based on new data inputs, enabling it to handle various and evolving price table formats effectively.
 
+## Why This Project?
+
+This repository showcases how to integrate machine learning models, OCR, and image processing into a complete solution. It demonstrates:
+
+- **Seamless ML Integration**: Combining PaddleOCR and a TensorFlow Lite model into a single pipeline.
+- **Error Resilience**: Robust handling of poor-quality images and unexpected input formats.
+- **Scalable Design**: Designed for batch processing and easy extension with additional OCR models.
+- **Lightweight Deployment**: The system is optimized to be lightweight, enabling seamless integration as part of a mobile or web app.
+
+
+## Extensibility
+
+This system is designed to be modular and easily extendable:
+
+- **Replaceable OCR Engine**: Swap out PaddleOCR with another OCR library like Tesseract or EasyOCR.
+- **Model Customization**: Retrain the TensorFlow Lite model on custom datasets for other use cases.
+- **Flexible Output Formats**: Extend post-processing to generate outputs in JSON, Excel, or other formats.
+- **Mobile-Friendly Design**: Its lightweight architecture makes it suitable for deployment within apps, ensuring efficient on-device processing.
+
 
 ## Installation
 
