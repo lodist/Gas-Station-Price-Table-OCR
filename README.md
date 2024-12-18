@@ -25,7 +25,7 @@ This project integrates multiple components into a cohesive system for extractin
    - Validates and formats the final output to ensure accuracy.
 
 <p align="center">
-    <img src="https://github.com/lodist/Gas-Station-Price-Table-OCR/sample pictures/system_architecture_diagram" width="20%" />
+    <img src="https://raw.githubusercontent.com/lodist/Gas-Station-Price-Table-OCR/main/sample%20pictures/system_architecture_diagram.png" width="20%" />
 </p>
 
 ## Image examples
