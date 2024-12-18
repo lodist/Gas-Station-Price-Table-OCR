@@ -24,6 +24,9 @@ This project integrates multiple components into a cohesive system for extractin
    - Matches recognized text with detected numbers.
    - Validates and formats the final output to ensure accuracy.
 
+<p align="center">
+    <img src="https://github.com/lodist/Gas-Station-Price-Table-OCR/sample pictures/system_architecture_diagram" width="20%" />
+</p>
 
 ## Image examples
 
